@@ -323,7 +323,7 @@ metadata:
 如 agent 不可用，由主线程直接执行。
 
 **自检记录隔离规则**：
-- 所有自检记录（字数统计、禁用词扫描结果、格式检查清单）必须写入独立文件 `自检_{标题}.md`（标题取自 Phase 2 核心框架）
+- 所有自检记录（字数统计、模板叠加检测结果、格式检查清单）必须写入独立文件 `自检_{标题}.md`（标题取自 Phase 2 核心框架）
 - **绝对不能**将自检记录附加到正文文件末尾
 - 自检文件与正文文件完全分离，便于后续清理和归档
 - 正文中不得出现任何 `<!-- 自检 -->` 或类似的检查标记注释
@@ -367,7 +367,7 @@ metadata:
 | [references/reversal-toolkit.md](references/reversal-toolkit.md) | 设计反转时 |
 | [references/emotional-arc-design.md](references/emotional-arc-design.md) | 设计情绪曲线时 |
 | [references/quality-checklist.md](references/quality-checklist.md) | 精修检查时 |
-| [references/banned-words.md](references/banned-words.md) | 禁用词表 |
+| [references/banned-words.md](references/banned-words.md) | 模板信号词叠加检测 |
 | [references/female-audience-writing.md](references/female-audience-writing.md) | 女频写作时 |
 | [references/character-basics.md](references/character-basics.md) | 人物基础设定 |
 | [references/character-design-methods.md](references/character-design-methods.md) | 人设方法 |
