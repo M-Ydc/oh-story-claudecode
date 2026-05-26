@@ -32,9 +32,13 @@ description: |
 
 1. 分析用户请求，提取意图关键词
 2. 匹配上表，找到对应的 skill
-3. 如果能明确匹配，直接调用对应 skill（`Skill("skill-name")`）
-4. 如果无法匹配，询问用户想做什么（从上表中选择）
-5. 如果用户说"我想写小说"但未指定长篇/短篇，询问篇幅类型后再路由
+3. **环境检测**：检查当前是否为 Hermes 环境（存在 `delegate_task` 工具即为 Hermes）。
+   - 如果是 Hermes 环境，且匹配到的 skill 为写作类（`story-long-write` 或 `story-short-write`），改为加载 `story-hermes-orchestrator`，并将原 skill 名作为初始参数传递给 orchestrator
+   - 如果是 Hermes 环境，但匹配到的 skill 不是写作类（拆文/扫榜/去AI味/封面等），直接加载对应 skill
+   - 如果不是 Hermes 环境（Claude Code 等），直接加载对应 skill
+4. 如果能明确匹配，加载对应 skill
+5. 如果无法匹配，询问用户想做什么（从上表中选择）
+6. 如果用户说"我想写小说"但未指定长篇/短篇，询问篇幅类型后再路由
 
 ## 项目状态感知
 
