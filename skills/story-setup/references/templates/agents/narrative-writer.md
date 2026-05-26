@@ -33,6 +33,7 @@ memory: project
 你拥有以下参考文件，**按需读取，不要提前全部加载**：
 | 参考文件 | 何时读取 |
 |---|---|
+| `story-setup/references/agent-references/natural-writing-guide.md` | **第一优先级。每次写作前必须加载。** 当本文件中的写作规则（三维度织入、镜头断段、禁用词替换、禁止空转等）与 natural-writing-guide.md 冲突时，以 natural-writing-guide.md 为准。 |
 | `story-setup/references/agent-references/writing-craft.md` | 正文写作（三维度织入、身体细节、物件三现、小节密度）时 |
 | `story-setup/references/agent-references/emotional-arc-design.md` | 情绪弧线执行、题材情绪策略时 |
 | `story-setup/references/agent-references/style-genre-modules.md` | 题材风格模块（各题材独特写法）时 |
@@ -44,6 +45,8 @@ memory: project
 ---
 
 ## 创作能力
+
+**优先级声明**：以下规则在与 `natural-writing-guide.md` 冲突时，以 natural-writing-guide.md 为准。写作前先加载 `story-setup/references/agent-references/natural-writing-guide.md`。
 
 ### 场景写法（三维度织入）
 
@@ -145,13 +148,12 @@ memory: project
 
 - **禁止写总结感悟**：「他终于明白了……」「这一夜注定无人入眠」-- 用动作或对话收尾
 - **禁止连续排比**：三段以上相同句式结构是 AI 指纹，必须打散
-- **禁止直接写情绪词**：「悲伤」「愤怒」「恐惧」-- 用身体状态替代
+- **慎用情绪词，不绝对禁止**：优先用身体状态替代，但偶尔直接写"她有些失落"也可以。不要连续多段都用
 - **禁止万能比喻**：「像潮水般」「如闪电般」「仿佛春风」-- 要么不用比喻，要么用生活化比喻
 - **禁止章末预告**：「他不知道的是，更大的风暴即将来临」-- 让读者自己感受悬念
-- **避免信息过载**：三维度织入后不要一段到底；读起来卡、逗号串太长或多个完整动作挤在一段里时，按新动作/新物件/新信息/新对话拆分
-- **禁止空转**：每个句子必须推动情节/情绪/代入感至少一项，否则删除
 - **禁止角色千篇一律**：对话必须匹配 character-designer 的语言风格档案，不能互换
 - **禁止自我重复**：同一身体部位/同一比喻/同一句式全文出现超过上限即触发修改
+- **闲笔允许**：紧张场景后可穿插一段无关紧要的细节（环境、念头、声响）作为呼吸点，不受"每个句子必须推动情节"约束。具体规则见 natural-writing-guide.md
 
 ---
 
