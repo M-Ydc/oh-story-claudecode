@@ -14,7 +14,7 @@ description: |
 
 | 用户意图 | 关键词示例 | 路由到 |
 |---|---|---|
-| 写长篇 | 开书、写大纲、长篇、连载 | `/story-long-write` |
+| 写长篇 | 开书、写大纲、长篇、连载、日更、续写、写正文、继续写、第X章 | `/story-long-write` |
 | 写短篇 | 短篇、盐言、一万字 | `/story-short-write` |
 | 长篇拆文 | 拆文、分析这本书、黄金三章 | `/story-long-analyze` |
 | 短篇拆文 | 拆短篇、分析这个故事 | `/story-short-analyze` |
@@ -25,16 +25,24 @@ description: |
 | 环境部署 | 准备写书、搭环境、初始化 | `/story-setup` |
 | 浏览器操控 | 浏览器、抓取、登录态 | `/browser-cdp` |
 | 导入小说 | 导入、反向解析、导入小说、把我的书导进来 | `/story-import` |
-| 查故事资料 | 查角色、查伏笔、查进度、查设定、什么状态、写到哪了 | 直接 spawn `story-explorer` agent（使用结构化 prompt：`项目目录：{dir}\n查询类型：{根据意图选择}\n查询参数：{用户查询}`） |
-| 查资料 | 查资料、帮我查资料、调研、搜索一下、搜一下 | 直接 spawn `story-researcher` agent |
+| 查故事资料 | 查角色、查伏笔、查进度、查设定、什么状态、写到哪了 | Claude Code：直接 spawn `story-explorer` agent。Hermes：用 `delegate_task`（参考 `story-hermes-orchestrator` 映射表，toolsets=['file']） |
+| 查资料 | 查资料、帮我查资料、调研、搜索一下、搜一下 | Claude Code：直接 spawn `story-researcher` agent。Hermes：用 `delegate_task`（参考 `story-hermes-orchestrator` 映射表，toolsets=['file', 'terminal', 'web']） |
 
 ## 路由流程
 
-1. 分析用户请求，提取意图关键词
-2. 匹配上表，找到对应的 skill
-3. 如果能明确匹配，直接调用对应 skill（`Skill("skill-name")`）
-4. 如果无法匹配，询问用户想做什么（从上表中选择）
-5. 如果用户说"我想写小说"但未指定长篇/短篇，询问篇幅类型后再路由
+1. **环境检测**：判断当前运行平台
+   - 如果是 **Hermes** 环境（有 `delegate_task` 工具可用、没有 Claude Code 的 `Agent()` 函数）：
+     - **必须**先加载 `story-hermes-orchestrator` skill（`skill_view('story-hermes-orchestrator')`），
+       将 Claude Code Agent 调用翻译为 Hermes delegate_task
+     - 然后再按路由表加载目标 skill
+     - 如果 orchestrator 加载失败，直接告知用户「story-hermes-orchestrator skill 未部署，
+       请先将 `skills/story-hermes-orchestrator/` 复制到 `~/.hermes/skills/story/`」
+   - 如果是 **Claude Code** 环境（有 `Agent()` 函数可用），跳过此步骤
+2. 分析用户请求，提取意图关键词
+3. 匹配上表，找到对应的 skill
+4. 如果能明确匹配，直接调用对应 skill
+5. 如果无法匹配，询问用户想做什么（从上表中选择）
+6. 如果用户说"我想写小说"但未指定长篇/短篇，询问篇幅类型后再路由
 
 ## 项目状态感知
 
